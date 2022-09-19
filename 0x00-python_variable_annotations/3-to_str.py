@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-""" Type-annotated function floor which
-takes a float n as argument and returns the floor of the float."""
+""" Type-annotated function to_str that takes a float n."""
 
 
 def to_str(n: float) -> str:
-    """ Returns the floor of the float"""
+    """ Returns string n"""
     return str(n)
