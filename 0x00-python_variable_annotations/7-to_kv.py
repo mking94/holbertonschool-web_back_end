@@ -3,6 +3,6 @@
 from typing import List, Tuple, Union
 
 
-def to_kv(k:str, v: Union[int, float]) -> Tuple[str, float]:
+def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
     """ Returns a Tuple"""
-    return Tuple(k, (v * v))
+    return Tuple(k, (v**2))
