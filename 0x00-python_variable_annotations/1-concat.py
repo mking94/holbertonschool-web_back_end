@@ -5,8 +5,8 @@ b as arguments and returns their contact as a string.
 """
 
 
-def contact(str1: str, str: str) -> str:
+def contact(str1: str, str2: str) -> str:
     """
-    Return the contcat of two string
+    Return the contcat of two strings
     """
     return str1 + str2
