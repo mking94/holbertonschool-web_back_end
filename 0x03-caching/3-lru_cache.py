@@ -62,4 +62,4 @@ class LRUCache(BaseCaching):
             for k, v in self.cacheDict.items():
                 if v is key:
                     self.cacheDict.pop(k)
-                    self.cacheDict[timestamp] = 
+                    self.cacheDict[timestamp] = v
