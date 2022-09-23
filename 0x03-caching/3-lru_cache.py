@@ -1,65 +1,47 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ LRU Caching """
 from base_caching import BaseCaching
-from datetime import datetime
 
 
 class LRUCache(BaseCaching):
-    """
-    This class will inherit self.cache_data from BaseCashing
-    """
+    """ Class that inherits from BaseCaching and is a caching system """
     def __init__(self):
-        """
-        Init from BaseCaching
-        """
         super().__init__()
-        self.cacheDict = {}
+        self.head, self.tail = '-', '='
+        self.next, self.prev = {}, {}
+        self.handle(self.head, self.tail)
+
+    def handle(self, head, tail):
+        """ LRU algorithm, handle elements """
+        self.next[head], self.prev[tail] = tail, head
+
+    def _remove(self, key):
+        """ LRU algorithm, remove element """
+        self.handle(self.prev[key], self.next[key])
+        del self.prev[key], self.next[key], self.cache_data[key]
+
+    def _add(self, key, item):
+        """ LRU algorithm, add element """
+        self.cache_data[key] = item
+        self.handle(self.prev[self.tail], key)
+        self.handle(key, self.tail)
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            print("DISCARD: {}".format(self.next[self.head]))
+            self._remove(self.next[self.head])
 
     def put(self, key, item):
-        """
-        Adds key value pairs to self.cache_data
-        """
-        if key is not None and item is not None:
-            keyList = list(self.cache_data)[0:]
-            if key in keyList:
-                del self.cache_data[key]
-                keyList.remove(key)
-            if (len(keyList) + 1) > BaseCaching.MAX_ITEMS:
-                lru = min(self.cacheDict.keys())
-                remove = self.cacheDict[lru]
-                self.cacheDict.pop(lru)
-                print("DISCARD: " + remove)
-                del self.cache_data[remove]
-            self.cache_data[key] = item
-            keyList.append(key)
-            self.cacheCache(key)
-
-        else:
-            pass
+        """ Assign to the dictionary """
+        if key and item:
+            if key in self.cache_data:
+                self._remove(key)
+            self._add(key, item)
 
     def get(self, key):
-        """
-        Retrieves items from self.cache_data by key
-        """
-        keyList = list(self.cache_data)[0:]
-        if key in keyList:
-            self.put(key, self.cache_data[key])
-            return self.cache_data[key]
-        else:
-            pass
-
-    def cacheCache(self, key):
-        """
-        Maintains a dict of timstamps and keys to check
-        access for recently used
-        """
-        now = datetime.now()
-        timestamp = datetime.timestamp(now)
-
-        if key not in self.cacheDict.values():
-            self.cacheDict[timestamp] = key
-        else:
-            for k, v in self.cacheDict.items():
-                if v is key:
-                    self.cacheDict.pop(k)
-                    self.cacheDict[timestamp] = v
+        """ Return the value linked """
+        if key is None or self.cache_data.get(key) is None:
+            return None
+        if key in self.cache_data:
+            value = self.cache_data[key]
+            self._remove(key)
+            self._add(key, value)
+            return value
