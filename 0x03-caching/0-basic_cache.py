@@ -6,9 +6,7 @@ BaseCaching = __import__('BaseCaching').BaseCaching
 
 
 class BasicCache(BaseCaching):
-
-
-""" BasicCache module """
+   """ BasicCache module """
 
    def put(self, key, item):
         """ Put the key and item"""
@@ -17,7 +15,6 @@ class BasicCache(BaseCaching):
 
     def get(self, key):
         """ Get the cache data"""
-        if key is None or key not in self.cache_data.keys():
+        if key is None and key not in self.cache_data.keys():
             return self.cache_data[key]
-        else:
-            return None
+        return None
