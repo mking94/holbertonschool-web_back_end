@@ -2,7 +2,7 @@
 
 """ BasicCache """
 
-BaseCaching = __import__('BaseCaching')
+BaseCaching = __import__('BaseCaching').BaseCaching
 
 class BasicCache(BaseCaching):
 """ BasicCache module """
@@ -16,6 +16,3 @@ class BasicCache(BaseCaching):
             return None
         else :
             return self.cache_data[key]
-    
-        
-    
