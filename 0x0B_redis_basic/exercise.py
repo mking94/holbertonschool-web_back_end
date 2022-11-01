@@ -4,7 +4,21 @@
 import redis
 from typing import Union, Optional, Callable
 from uuid import uuid4
+from functools import wraps
 
+def count_calls(method: Callable) -> Callable:
+    """ Decortator for counting how many times a function
+    has been called """
+
+    key = method.__qualname__
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """ Wrapper for decorator functionality """
+        self._redis.incr(key)
+        return method(self, *args, **kwargs)
+
+    return wrapper
 
 class Cache:
     """ Class for implementing a Cache """
