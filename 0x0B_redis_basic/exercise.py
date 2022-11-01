@@ -3,6 +3,7 @@
 
 import redis
 
+
 class Cache:
     """ Class for implementing a Cache """
 
