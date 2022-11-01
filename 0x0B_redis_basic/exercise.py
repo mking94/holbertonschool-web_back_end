@@ -108,13 +108,10 @@ class Cache:
             value = int(value.decode("utf-8"))
         except Exception:
             value = 0
-        return value#!/usr/bin/env python3
-""" Tasks - Redis """
+        return value  # !/usr/bin/env python3
 
-import redis
-from typing import Union, Optional, Callable
-from uuid import uuid4, UUID
-from functools import wraps
+
+""" Tasks - Redis """
 
 
 def count_calls(method: Callable) -> Callable:
