@@ -6,6 +6,7 @@ from typing import Union, Optional, Callable
 from uuid import uuid4, UUID
 from functools import wraps
 
+
 def count_calls(method: Callable) -> Callable:
     """ Decortator for counting how many times a function
     has been called """
@@ -19,6 +20,7 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwargs)
 
     return wrapper
+
 
 def call_history(method: Callable) -> Callable:
     """ Decorator to store the history """
@@ -35,6 +37,8 @@ def call_history(method: Callable) -> Callable:
         return output
 
     return wrapper
+
+
 def replay(fn: Callable):
     """Display the history of calls of a particular function"""
     r = redis.Redis()
