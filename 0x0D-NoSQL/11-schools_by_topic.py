@@ -7,4 +7,4 @@ def schools_by_topic(mongo_collection, topic):
     """ Python function that returns the list of school having a specific topic """
     if mongo_collection is None:
         return None
-    return mongo_collection.find({'topics': topics})
+    return mongo_collection.find({'topic': topic})
