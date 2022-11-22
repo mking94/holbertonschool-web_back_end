@@ -1,9 +1,6 @@
-export default function getListStudentIds(list) {
-  let res = []
-  if (typeof(list) === 'object') {
-    for (i = 0; i < list.length; i++) {
-      res.push(list[i].id);
-    }
+export default function getListStudentIds(arrayobjects) {
+  if (!(Array.isArray(arrayobjects))) {
+    return [];
   }
-  return res;
+  return arrayobjects.map((a) => a.id);
 }
