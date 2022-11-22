@@ -1,6 +1,6 @@
-export default function getListStudentIds(arrayobjects, loc) {
+export default function getListStudentIds(arrayobjects, city) {
   if (!(Array.isArray(arrayobjects))) {
     return [];
   }
-  return arrayobjects.filter((arrayobjects) => arrayobjects.location == loc);
+  return arrayobjects.filter((value) => value.location === city);
 }
